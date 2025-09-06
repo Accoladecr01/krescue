@@ -1,0 +1,10 @@
+image: bitnami/postgresql:16
+storageSize: 1Gi
+
+db:
+  name: appdb
+  user: app
+  password: dev-password   # NOTE: dev only. Override in real runs.
+
+service:
+  port: 5432
