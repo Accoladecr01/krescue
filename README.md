@@ -12,3 +12,4 @@ kubectl create namespace krescue-dr
 # install Postgres + app to primary
 helm install pg infra/helm/postgres -n krescue-primary -f infra/helm/postgres/values-primary.yaml
 helm install app infra/helm/sample-app -n krescue-primary -f infra/helm/sample-app/values-primary.yaml
+> ⚠️ Dev-only secrets: this repo includes example credentials for local MinIO. Replace with your own when running locally and **never commit real credentials**.
