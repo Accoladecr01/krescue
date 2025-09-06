@@ -1,0 +1,11 @@
+image: docker.io/minio/minio:RELEASE.2024-09-01T01-00-00Z
+replicas: 1
+mode: standalone
+
+rootUser: krescueadmin       # DEV ONLY – do not use in production
+rootPassword: krescuepass    # DEV ONLY – do not use in production
+bucketName: krescue
+
+storageSize: 2Gi
+service:
+  port: 9000
