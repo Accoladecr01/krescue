@@ -7,12 +7,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Logging.ClearProviders();
 builder.Logging.AddJsonConsole();
 
-// Register a background worker
+// Background worker
 builder.Services.AddHostedService<HeartbeatWorker>();
 
 var app = builder.Build();
 
-// --- STATUS (already there) ---
+// ---- ENDPOINTS (top-level statements come first) ----
+
+// Health/status
 app.MapGet("/status", () => Results.Json(new
 {
     ok = true,
@@ -20,19 +22,12 @@ app.MapGet("/status", () => Results.Json(new
     version = "0.1.0"
 }));
 
-// === ADD: simple models & helper ===
-static string NewBackupName() => $"backup-{DateTime.UtcNow:yyyyMMdd-HHmmss}";
-
-public record BackupRequest(string Namespace = "krescue-primary", string? LabelSelector = "app=sample-app");
-public record BackupResponse(bool Ok, string Mode, string BackupName, DateTime StartedAtUtc);
-
-// === ADD: /backup (dry-run) ===
+// /backup (dry-run for now)
 app.MapPost("/backup", (BackupRequest? req) =>
 {
     var mode = Environment.GetEnvironmentVariable("DRY_RUN") == "0" ? "live" : "dry-run";
-    var name = NewBackupName();
+    var name = Helpers.NewBackupName();
 
-    // In DRY-RUN we just pretend and return a plan
     if (mode == "dry-run")
     {
         return Results.Json(new BackupResponse(
@@ -43,13 +38,22 @@ app.MapPost("/backup", (BackupRequest? req) =>
         ));
     }
 
-    // LIVE mode (to be implemented): create Velero Backup CR via K8s client
     return Results.Json(new { ok = false, error = "live mode not implemented yet" });
 });
 
 app.Run();
 
-// Background worker (already there)
+
+// ---- TYPE DECLARATIONS MUST COME AFTER TOP-LEVEL STATEMENTS ----
+
+public static class Helpers
+{
+    public static string NewBackupName() => $"backup-{DateTime.UtcNow:yyyyMMdd-HHmmss}";
+}
+
+public record BackupRequest(string Namespace = "krescue-primary", string? LabelSelector = "app=sample-app");
+public record BackupResponse(bool Ok, string Mode, string BackupName, DateTime StartedAtUtc);
+
 public class HeartbeatWorker : BackgroundService
 {
     private readonly ILogger<HeartbeatWorker> _logger;
