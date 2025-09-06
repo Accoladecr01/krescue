@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "minio.fullname" . }}-init
+  labels: {{- include "minio.labels" . | nindent 4 }}
+spec:
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+      - name: mc
+        image: docker.io/minio/mc:RELEASE.2024-09-01T00-00-00Z
+        envFrom:
+        - secretRef:
+            name: {{ include "minio.fullname" . }}-secret
+        command:
+          - /bin/sh
+          - -c
+          - |
+            set -eux
+            mc alias set local http://{{ include "minio.fullname" . }}.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.service.port }} "$MINIO_ROOT_USER" "$MINIO_ROOT_PASSWORD"
+            mc mb -p local/{{ .Values.bucketName }} || true
