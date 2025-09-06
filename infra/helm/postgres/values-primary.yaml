@@ -1,0 +1,2 @@
+db:
+  password: dev-password    # dev only; override in real runs
