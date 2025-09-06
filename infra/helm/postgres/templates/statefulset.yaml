@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "postgres.fullname" . }}
+  labels:
+    {{- include "postgres.labels" . | nindent 4 }}
+spec:
+  serviceName: {{ include "postgres.fullname" . }}
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ include "postgres.fullname" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "postgres.fullname" . }}
+        {{- include "postgres.labels" . | nindent 8 }}
+    spec:
+      containers:
+      - name: postgres
+        image: {{ .Values.image }}
+        imagePullPolicy: IfNotPresent
+        envFrom:
+        - secretRef:
+            name: {{ include "postgres.fullname" . }}-secret
+        ports:
+        - containerPort: 5432
+        readinessProbe:
+          exec:
+            command: ["bash","-c","pg_isready -U \"$POSTGRES_USER\""]
+          initialDelaySeconds: 5
+          periodSeconds: 5
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: {{ .Values.storageSize }}
