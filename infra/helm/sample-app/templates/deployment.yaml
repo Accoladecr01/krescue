@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "sampleapp.fullname" . }}
+  labels:
+    {{- include "sampleapp.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ include "sampleapp.fullname" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "sampleapp.fullname" . }}
+        {{- include "sampleapp.labels" . | nindent 8 }}
+    spec:
+      containers:
+      - name: app
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+        - containerPort: 8081
+        env:
+        - name: ASPNETCORE_URLS
+          value: http://0.0.0.0:8081
+        readinessProbe:
+          httpGet:
+            path: /status
+            port: 8081
+          initialDelaySeconds: 5
+          periodSeconds: 5
