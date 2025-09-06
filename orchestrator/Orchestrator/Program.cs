@@ -2,6 +2,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.WebHost.UseUrls("http://0.0.0.0:8090");  // always listen on 8090
+
 builder.Logging.ClearProviders();
 builder.Logging.AddJsonConsole();
 builder.Services.AddHostedService<HeartbeatWorker>();
