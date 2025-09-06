@@ -1,0 +1,14 @@
+# Normalize text files to LF in the repository
+* text=auto eol=lf
+
+# Treat these as binary (no line-ending conversions, no diffs)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.pdf binary
+*.zip binary
+*.gz binary
+
+# Keep shell scripts LF (prevents Windows shells from breaking)
+*.sh text eol=lf
