@@ -1,0 +1,35 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: rescueplans.krescue.io
+spec:
+  group: krescue.io
+  scope: Namespaced
+  names:
+    plural: rescueplans
+    singular: rescueplan
+    kind: RescuePlan
+    shortNames:
+      - rplan
+  versions:
+    - name: v1alpha1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              required: ["action"]
+              properties:
+                schedule:
+                  type: string
+                  description: Cron-like string (optional)
+                action:
+                  type: string
+                  enum: ["backup", "restore", "failover"]
+                targetCluster:
+                  type: string
+                  enum: ["primary", "dr"]
+          required: ["spec"]
