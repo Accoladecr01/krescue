@@ -1,0 +1,11 @@
+{
+  "name": "krescue",
+  "private": true,
+  "packageManager": "pnpm@9.0.0",
+  "workspaces": ["ts/*"],
+  "scripts": {
+    "lint": "eslint .",
+    "test": "vitest run",
+    "format": "prettier -c ."
+  }
+}
